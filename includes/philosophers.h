@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:12:56 by mhidani           #+#    #+#             */
-/*   Updated: 2025/10/29 12:15:51 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/11/06 15:23:54 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,30 @@
 # define TRUE 0x01
 # define FALSE 0x00
 
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <time.h>
+
 typedef char	t_bool;
+
+typedef struct s_manager
+{
+	int 	number_of_philosophers;
+	long	time_to_die;
+	long	time_to_eat;
+	long	time_to_sleep;
+	long	times_you_should_eat;
+}	t_manager;
+
+// Auxiliar
+t_bool		ft_isspace(char c);
+long		ft_atol(char *str);
+t_bool		ft_isdigit(char c);
+size_t		ft_putstr_fd(char *str, int fd);
+
+// Manager Utils
+t_manager	*ft_new_manager(void);
+void		ft_clean_manager(void *ptr);
 
 #endif
