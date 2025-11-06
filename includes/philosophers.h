@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:12:56 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/06 15:23:54 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/11/06 16:29:39 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,11 @@ t_bool		ft_isdigit(char c);
 size_t		ft_putstr_fd(char *str, int fd);
 
 // Manager Utils
+void		ft_manager_assign(int argc, char **argv, t_manager *manager);
 t_manager	*ft_new_manager(void);
 void		ft_clean_manager(void *ptr);
+
+// Table for the pasta dinner
+void		set_table_pasta_dinner(t_manager *manager);
 
 #endif
