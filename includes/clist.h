@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 11:36:23 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/27 13:01:53 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:41:44 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_clist
 	unsigned long	size;
 }	t_clist;
 
-t_clist	*ft_create_clist(void *data, void (*clean)(void *));
+t_clist	*ft_create_clist(void);
 t_node	*ft_create_node(void *data);
 t_clist	*ft_add_node_clist(t_clist *list, void *data);
 void	ft_clean_node(t_node *node, void (*clean)(void *));
