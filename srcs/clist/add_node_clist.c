@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 12:56:21 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/27 13:01:46 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/11/27 15:39:41 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ t_clist	*ft_add_node_clist(t_clist *list, void *data)
 	node->prev = list->bottom;
 	node->next = list->top;
 	list->bottom = node;
+	list->size += 1;
 }
