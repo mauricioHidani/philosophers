@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 12:12:56 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/27 13:20:28 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/11/28 14:19:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,42 +19,74 @@
 # define TRUE 0x01
 # define FALSE 0x00
 
+# include <pthread.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <time.h>
 # include <sys/time.h>
-# include <pthread.h>
-# include "clist.h"
 
-typedef char			t_bool;
-typedef unsigned int	t_uint;
-typedef unsigned long	t_ulong;
+typedef char		t_bool;
+
+enum e_status
+{
+	NEUTRAL,
+	THINK,
+	SLEEP,
+	DEAD
+};
 
 typedef struct s_philo
 {
-	int				n_meals;
-	t_bool			left_fork;
-	t_bool			right_fork;
+	int				id;
+	enum e_status	status;
+	pthread_t		thread;
 	t_table			*table;
-}	t_philo;
+	int				meals;
+	t_bool			left_fork;
+	t_bool			rigth_fork;
+	struct timeval	live_time;
+}					t_philo;
 
-typedef struct s_table
+typedef struct s_table // cannot modify in threads
 {
-	pthread_mutex_t	meal_mtx;
-	t_ulong			starvation_time;
-	t_ulong			eat_time;
-	t_ulong			sleep_time;
-	t_clist			*philos;
-}	t_table;
+	int				forks;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	pthread_mutex_t	mtx;
+	t_bool			ready_to_work;
+	t_philo			*philos;
+}					t_table;
 
-t_bool		ft_isspace(char c);
-long		ft_atol(char *str);
-t_bool		ft_isdigit(char c);
-size_t		ft_putstr_fd(char *str, int fd);
+typedef struct s_timer
+{
+	struct timeval	start;
+	struct timeval	current;
+	struct timeval	end;
+}	t_timer;
 
-// Philo Utils -----------------------------------------------------------------
-t_philo		*ft_create_philo(t_table *table, int n_meals);
-void		ft_clean_philo(void *ptr);
+// Meal ------------------------------------------------------------------------
+void	ft_serve_meal(t_table *table);
+
+// Utilities -------------------------------------------------------------------
+t_bool	ft_isspace(char c);
+t_bool	ft_isdigit(char c);
+long	ft_atol(char *src);
+char	*ft_itoa(long nbr);
+void	*ft_calloc(size_t nmemb, size_t size);
+
+// Philosophers Utilities ------------------------------------------------------
+t_philo	*ft_create_philos(int forks, int meals);
+void	ft_clean_philos(t_philo *philos);
+void	ft_print_philo_state(t_philo *philo);
+
+// Table Utilities -------------------------------------------------------------
+t_table	*ft_create_table(int argc, char **argv);
+void	ft_clean_table(t_table *table);
+
+// Timer Utilities -------------------------------------------------------------
+t_timer	ft_create_timer(long end_offset);
+t_bool	ft_its_not_over(t_timer timer);
 
 #endif
