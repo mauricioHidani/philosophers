@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 14:53:51 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/06 15:14:16 by mhidani          ###   ########.fr       */
+/*   Created: 2025/11/28 09:32:26 by mhidani           #+#    #+#             */
+/*   Updated: 2025/11/28 09:40:08 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
-long	ft_atol(char *str)
+long	ft_atol(char *src)
 {
 	long	nbr;
 	long	sign;
 	size_t	i;
 
-	if (!str)
+	if (!src)
 		return (0);
-	i = 0;
 	nbr = 0;
 	sign = 1;
-	while (str[i] && ft_isspace(str[i]))
+	while (src[i] && ft_isspace(src[i]))
 		i++;
-	if (str[i] == '-' && str[i] == '+')
+	if (src[i] && (src[i] == 45 || src[i] == 43))
 	{
-		if (str[i] == '-')
+		if (src[i] == 45)
 			sign = -1;
 		i++;
 	}
-	while (str[i] && ft_isdigit(str[i]))
+	while (src[i] && ft_isdigit(src[i]))
 	{
-		nbr = 10 * nbr + (nbr - 48);
+		nbr = 10 * nbr + (src[i] - 48);
 		i++;
 	}
 	return (nbr * sign);
