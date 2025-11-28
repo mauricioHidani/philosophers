@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 14:56:59 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/06 14:58:35 by mhidani          ###   ########.fr       */
+/*   Created: 2025/11/28 09:34:08 by mhidani           #+#    #+#             */
+/*   Updated: 2025/11/28 09:35:07 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 t_bool	ft_isspace(char c)
 {

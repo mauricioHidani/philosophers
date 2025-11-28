@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 14:59:40 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/06 15:00:19 by mhidani          ###   ########.fr       */
+/*   Created: 2025/11/28 09:35:49 by mhidani           #+#    #+#             */
+/*   Updated: 2025/11/28 09:36:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 t_bool	ft_isdigit(char c)
 {
-	return (c >= 48 && c <= 59);
+	return (c >= 48 && c <= 57);
 }
