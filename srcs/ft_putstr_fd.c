@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/06 15:21:58 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/06 15:24:21 by mhidani          ###   ########.fr       */
+/*   Created: 2025/11/28 09:29:50 by mhidani           #+#    #+#             */
+/*   Updated: 2025/11/28 09:31:51 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 size_t	ft_putstr_fd(char *str, int fd)
 {
@@ -20,9 +20,6 @@ size_t	ft_putstr_fd(char *str, int fd)
 		return (0);
 	i = 0;
 	while (str[i])
-	{
-		write(fd, &str[i], 1);
-		i++;
-	}
+		i += write(fd, str[i], 1);
 	return (i);
 }
