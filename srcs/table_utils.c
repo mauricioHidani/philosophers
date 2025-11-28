@@ -5,35 +5,52 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/25 09:34:35 by mhidani           #+#    #+#             */
-/*   Updated: 2025/11/27 13:31:10 by mhidani          ###   ########.fr       */
+/*   Created: 2025/11/28 09:24:52 by mhidani           #+#    #+#             */
+/*   Updated: 2025/11/28 11:54:50 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_table	*ft_init_table(int c, char **v)
+static long	ft_get_long(int argc, int idx, char **argv);
+
+t_table	*ft_create_table(int argc, char **argv)
 {
 	t_table	*table;
+	t_philo	*philos;
+	int		meals;
 
-	table = malloc(1 * sizeof(t_table));
-	if (table == NULL)
-	{
-		ft_putstr_fd("Error: allocate table in the memory.", STDERR_FILENO);
+	if (argc < 4)
 		return (NULL);
-	}
-	table->n_philo = ft_take_lvalue(c, 1, v);
-	table->time_to_die = ft_take_lvalue(c, 2, v);
-	table->time_to_eat = ft_take_lvalue(c, 3, v);
-	table->time_to_sleep = ft_take_lvalue(c, 4, v);
-	table->n_meals = ft_take_lvalue(c, 5, v);
-	table->philos[table->n_philo];
+	table = malloc(sizeof(t_table));
+	if (!table)
+		return (NULL);
+	table->forks = (int)ft_get_long(argc, 1, argv);
+	table->time_to_die = ft_get_long(argc, 2, argv);
+	table->time_to_eat = ft_get_long(argc, 3, argv);
+	table->time_to_sleep = ft_get_long(argc, 4, argv);
+	meals = (int)ft_get_long(argc, 5, argv);
+	table->philos = ft_create_philos(table->forks, meals);
+	if (!table->philos)
+		ft_clean_table(table);
+	pthread_mutex_init(&(table->mtx), NULL);
+	table->ready_to_work = TRUE;
 	return (table);
 }
 
-unsigned long	ft_take_lvalue(int c, int i, char **v)
+void	ft_clean_table(t_table *table)
 {
-	if (i < c)
-		return (atoi(v[i]));
-	return (0);
+	if (!table)
+		return ;
+	ft_clean_philos(table->philos);
+	free(table);
+	table = NULL;
+}
+
+static long	ft_get_long(int argc, int idx, char **argv)
+{
+	if (idx < argc)
+		return (ft_atol(argv[idx]));
+	ft_putstr_fd("Error: cannot access argument vector.", STDERR_FILENO);
+	return (-1);
 }
