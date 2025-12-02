@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atol.c                                             :+:      :+:    :+:   */
+/*   conversion_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 17:12:12 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/02 17:18:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/02 17:22:27 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,11 @@ long	ft_atol(char *src)
 		i++;
 	}
 	return (nbr * sign);
+}
+
+long	ft_get_lvalue(char **vector, int size, int idx)
+{
+	if (idx < size)
+		return (ft_atol(vector[idx]));
+	return (-1);
 }

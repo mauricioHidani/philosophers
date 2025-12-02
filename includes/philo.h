@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:33:06 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/02 17:18:20 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/02 17:22:32 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,4 @@ void	*ft_calloc(size_t nmemb, size_t size);
 t_bool	ft_isspace(char c);
 t_bool	ft_isdigit(char c);
 long	ft_atol(char *src);
+long	ft_get_lvalue(char **vector, int size, int idx);
