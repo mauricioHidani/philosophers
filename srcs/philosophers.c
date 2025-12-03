@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 19:59:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/02 22:45:25 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/03 16:51:40 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	ft_destroy_philos(t_philo **philos, size_t size)
 		free(philos[i]);
 		i++;
 	}
-	free(philos[i]);
+	free(philos);
 	return (TRUE);
 }
 
