@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 12:17:09 by mhidani           #+#    #+#              #
-#    Updated: 2025/12/03 00:12:24 by mhidani          ###   ########.fr        #
+#    Updated: 2025/12/03 16:46:19 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,15 +52,15 @@ $(NAME): $(BIN_DIR)
 
 $(SLIB_DIR):
 	@$(MKDIR) $@
-	@echo -n "$(C06)make directory $@$(RST)"
+	@echo "📁 $(C06)make directory $@$(RST)"
 
 $(OBJS_DIR):
 	@$(MKDIR) $@
-	@echo -n "$(C06)make directory $@$(RST)"
+	@echo "📁 $(C06)make directory $@$(RST)"
 
 $(BIN_DIR):
 	@$(MKDIR) $@
-	@echo -n "$(C06)make directory $@$(RST)"
+	@echo "📁 $(C06)make directory $@$(RST)"
 
 
 # Basic Commands ---------------------------------------------------------------
