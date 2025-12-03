@@ -6,11 +6,11 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/29 12:17:09 by mhidani           #+#    #+#              #
-#    Updated: 2025/10/29 16:24:38 by mhidani          ###   ########.fr        #
+#    Updated: 2025/12/03 00:12:24 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= philosophers
+NAME		= philo
 LOCAL		= 42sp.org.br
 SOCIAL		= linkedin.com/in/mauricio-hidani
 REPOSITORY	= github.com/mauricioHidani
@@ -47,7 +47,8 @@ C10			:= \033[38;5;208m# Bright orange
 
 all: banner $(NAME)
 
-$(NAME): $(SLIB_DIR) $(OBJS_DIR) $(BIN_DIR)
+$(NAME): $(BIN_DIR)
+	$(CC) $(CFLAGS) -I$(INCS_DIR) $(SRCS) -o $(BIN_DIR)$@
 
 $(SLIB_DIR):
 	@$(MKDIR) $@
