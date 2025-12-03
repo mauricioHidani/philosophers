@@ -6,43 +6,43 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:22:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/03 00:12:11 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/03 18:06:40 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_dining_table_monitor(t_dining_table *table)
+void ft_dining_table_monitor(t_dining_table *table)
 {
-	size_t	i;
-	t_philo	*philo;
+	size_t i;
+	t_philo *philo;
 
 	i = 0;
 	while (i < (size_t)table->number_of_philos)
 	{
 		philo = table->philos[i];
 		if (pthread_create(&philo->thread, NULL, ft_routine_monitor, philo) != 0)
-			return ;
+			return;
 		i++;
 	}
-	if (pthread_create(&table->death_monitor, NULL, 
-		ft_death_monitor, table) != 0)
-			return ;
+	if (pthread_create(&table->death_monitor, NULL,
+					   ft_death_monitor, table) != 0)
+		return;
 	i = 0;
 	while (i < (size_t)table->number_of_philos)
 	{
 		philo = table->philos[i];
 		if (pthread_join(philo->thread, NULL) != 0)
-			return ;
+			return;
 		i++;
 	}
 	if (pthread_join(table->death_monitor, NULL) != 0)
-		return ;
+		return;
 }
 
-void	*ft_routine_monitor(void *ptr)
+void *ft_routine_monitor(void *ptr)
 {
-	t_philo	*philo;
+	t_philo *philo;
 
 	philo = (t_philo *)ptr;
 	if (philo->id % 2 == 0)
@@ -53,12 +53,12 @@ void	*ft_routine_monitor(void *ptr)
 		if (philo->table->someone_died)
 		{
 			pthread_mutex_unlock(&philo->table->lifetime_mtx);
-			break ;
+			break;
 		}
 		pthread_mutex_unlock(&philo->table->lifetime_mtx);
-		if (philo->table->number_of_meals > 0 && 
+		if (philo->table->number_of_meals > 0 &&
 			philo->meals_eaten >= philo->table->number_of_meals)
-			break ;
+			break;
 		ft_eat(philo);
 		ft_sleep(philo);
 		ft_think(philo);
@@ -66,13 +66,14 @@ void	*ft_routine_monitor(void *ptr)
 	return (NULL);
 }
 
-void	*ft_death_monitor(void *ptr)
+void *ft_death_monitor(void *ptr)
 {
-	t_dining_table	*table;
-	long			time_since;
-	size_t			i;
+	t_dining_table *table;
+	long time_since;
+	size_t i;
 
 	table = (t_dining_table *)ptr;
+	ft_wait_for_time(table->time_to_die / 2);
 	while (TRUE)
 	{
 		i = 0;
@@ -89,7 +90,7 @@ void	*ft_death_monitor(void *ptr)
 			}
 			i++;
 		}
-		ft_wait_for_time(table->time_to_eat / 2);
+		ft_wait_for_time(200);
 	}
 	return (NULL);
 }
