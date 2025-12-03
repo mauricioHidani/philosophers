@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 19:29:15 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/02 20:15:11 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/03 00:09:44 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ pthread_mutex_t	**ft_new_forks(t_dining_table *table)
 	{
 		if (pthread_mutex_init(forks[i], NULL) != 0)
 		{
-			ft_destroy_forks(forks);
+			ft_destroy_forks(forks, size);
 			return (NULL);
 		}
 		i++;
