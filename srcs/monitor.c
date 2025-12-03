@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:22:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/02 23:57:01 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/03 00:12:11 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ void	ft_dining_table_monitor(t_dining_table *table)
 	t_philo	*philo;
 
 	i = 0;
-	while (i < table->number_of_philos)
+	while (i < (size_t)table->number_of_philos)
 	{
 		philo = table->philos[i];
-		if (pthread_create(philo->thread, NULL, ft_routine_monitor, philo) != 0)
+		if (pthread_create(&philo->thread, NULL, ft_routine_monitor, philo) != 0)
 			return ;
 		i++;
 	}
-	if (pthread_create(table->death_monitor, NULL, 
+	if (pthread_create(&table->death_monitor, NULL, 
 		ft_death_monitor, table) != 0)
 			return ;
 	i = 0;
-	while (i < table->number_of_philos)
+	while (i < (size_t)table->number_of_philos)
 	{
 		philo = table->philos[i];
-		if (pthread_join(philo, NULL) != 0)
+		if (pthread_join(philo->thread, NULL) != 0)
 			return ;
 		i++;
 	}
@@ -76,7 +76,7 @@ void	*ft_death_monitor(void *ptr)
 	while (TRUE)
 	{
 		i = 0;
-		while (i < table->number_of_philos)
+		while (i < (size_t)table->number_of_philos)
 		{
 			time_since = ft_get_time() - table->philos[i]->last_meal;
 			if (time_since > table->time_to_die)
