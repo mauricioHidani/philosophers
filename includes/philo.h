@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:33:06 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/02 23:56:31 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/03 00:08:57 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ typedef struct s_dining_table
 	pthread_mutex_t	print_mtx;
 	pthread_mutex_t	**forks_mtx;
 	pthread_t		death_monitor;
-	t_philo			**philos;
-}			t_dining_table;
+	struct s_philo	**philos;
+}					t_dining_table;
 
 typedef struct s_philo
 {
-	int				id;
-	long			last_meal;
-	long			meals_eaten;
-	pthread_t		thread;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	t_dining_table	*table;
-}	t_philo;
+	int						id;
+	long					last_meal;
+	long					meals_eaten;
+	pthread_t				thread;
+	pthread_mutex_t			*left_fork;
+	pthread_mutex_t			*right_fork;
+	struct s_dining_table	*table;
+}							t_philo;
 
 // Dining Table Utilities ------------------------------------------------------
 t_dining_table	*ft_new_dining_table(char **srcs, int size);
