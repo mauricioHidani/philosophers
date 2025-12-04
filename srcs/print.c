@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:28:36 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/03 16:51:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/04 01:03:11 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ void	ft_print_unverified(t_philo *philo, char *status)
 
 	pthread_mutex_lock(&philo->table->print_mtx);
 	timestamp = ft_get_time() - philo->table->lifetime;
-	printf("🛸 Philospher %d : %s [%ldms]\n", philo->id, status, timestamp);
+	printf("🛸 Philospher %d : %s [%ldms]\n", philo->id + 1, status, timestamp);
 	pthread_mutex_unlock(&philo->table->print_mtx);
 }

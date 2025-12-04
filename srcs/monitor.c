@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:22:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/03 18:06:40 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/04 01:23:40 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void ft_dining_table_monitor(t_dining_table *table)
 		i++;
 	}
 	if (pthread_create(&table->death_monitor, NULL,
-					   ft_death_monitor, table) != 0)
+						ft_death_monitor, table) != 0)
 		return;
 	i = 0;
 	while (i < (size_t)table->number_of_philos)
@@ -46,7 +46,7 @@ void *ft_routine_monitor(void *ptr)
 
 	philo = (t_philo *)ptr;
 	if (philo->id % 2 == 0)
-		ft_wait_for_time(philo->table->time_to_eat / 2);
+		ft_wait_for_time(philo->table->time_to_eat * 0.5);
 	while (TRUE)
 	{
 		pthread_mutex_lock(&philo->table->lifetime_mtx);

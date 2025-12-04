@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 19:59:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/03 16:51:40 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/04 01:01:34 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_bool	ft_destroy_philos(t_philo **philos, size_t size)
 {
 	size_t	i;
 
-	if (!philos && !philos[0]->table)
+	if (!philos || !philos[0]->table)
 		return (FALSE);
 	i = 0;
 	size = philos[i]->table->number_of_philos;
@@ -52,7 +52,7 @@ t_philo	**ft_new_philos(t_dining_table *table)
 		}
 		philos[i]->id = i;
 		philos[i]->table = table;
-		philos[i]->last_meal = 0;
+		philos[i]->last_meal = ft_get_time();
 		philos[i]->meals_eaten = 0;
 		ft_locate_forks_to_philo(philos[i]);
 		i++;
