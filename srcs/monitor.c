@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 20:22:39 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/04 01:23:40 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/04 17:25:22 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void *ft_death_monitor(void *ptr)
 				pthread_mutex_lock(&table->lifetime_mtx);
 				table->someone_died = TRUE;
 				pthread_mutex_unlock(&table->lifetime_mtx);
-				ft_print_unverified(table->philos[i], "😵 dead");
+				ft_print_unverified(table->philos[i], "😵 died");
 				return (NULL);
 			}
 			i++;

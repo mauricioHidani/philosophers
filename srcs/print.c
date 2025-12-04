@@ -6,11 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:28:36 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/04 01:03:11 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/04 17:25:59 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	ft_print_locked(t_philo *philo, char *status);
 
 void	ft_print_status(t_philo *philo, char *status)
 {
@@ -25,7 +27,7 @@ void	ft_print_status(t_philo *philo, char *status)
 	pthread_mutex_unlock(&philo->table->lifetime_mtx);
 	pthread_mutex_lock(&philo->table->print_mtx);
 	timestamp = ft_get_time() - philo->table->lifetime;
-	printf("🛸 Philospher %d : %s [%ldms]\n", philo->id, status, timestamp);
+	printf("[%ldms] [🛸 Philospher %d] [%s]\n", timestamp, philo->id, status);
 	pthread_mutex_unlock(&philo->table->print_mtx);
 }
 
@@ -35,6 +37,9 @@ void	ft_print_unverified(t_philo *philo, char *status)
 
 	pthread_mutex_lock(&philo->table->print_mtx);
 	timestamp = ft_get_time() - philo->table->lifetime;
-	printf("🛸 Philospher %d : %s [%ldms]\n", philo->id + 1, status, timestamp);
+	printf("[%ldms] [🛸 Philospher %d] [%s]\n", timestamp, philo->id, status);
 	pthread_mutex_unlock(&philo->table->print_mtx);
 }
+
+static void	ft_print_locked(t_philo *philo, char *status)
+{}

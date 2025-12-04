@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 22:37:34 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/04 01:27:29 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/04 17:24:52 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	ft_eat(t_philo *philo)
 		pthread_mutex_lock(philo->right_fork);
 		pthread_mutex_lock(philo->left_fork);
 	}
-	ft_print_status(philo, "🍴 has taken forks");
-	ft_print_status(philo, "🍝 eating");
+	ft_print_status(philo, "🍴 has taken a fork");
+	ft_print_status(philo, "🍝 is eating");
 	philo->last_meal = ft_get_time();
 	ft_wait_for_time(philo->table->time_to_eat);
 	philo->meals_eaten += 1;
@@ -35,7 +35,7 @@ void	ft_eat(t_philo *philo)
 
 void	ft_sleep(t_philo *philo)
 {
-	ft_print_status(philo, "😴 sleeping");
+	ft_print_status(philo, "😴 is sleeping");
 	ft_wait_for_time(philo->table->time_to_sleep);
 }
 
@@ -50,7 +50,7 @@ void	ft_think(t_philo *philo)
 	time_to_die = philo->table->time_to_die;
 	time_to_sleep = philo->table->time_to_sleep;
 	time_to_think = (time_to_die - time_to_sleep - time_to_eat) / 2;
-	ft_print_status(philo, "🤔 thinking");
+	ft_print_status(philo, "🤔 is thinking");
 	if (time_to_think > 0 && time_to_think < 600)
 		ft_wait_for_time(time_to_think);
 	else if (time_to_think > 600)
