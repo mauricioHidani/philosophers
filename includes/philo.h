@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:33:06 by mhidani           #+#    #+#             */
-/*   Updated: 2025/12/03 00:08:57 by mhidani          ###   ########.fr       */
+/*   Updated: 2025/12/05 16:25:40 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,4 @@ t_bool			ft_isdigit(char c);
 long			ft_atol(char *src);
 long			ft_get_lvalue(char **vector, int size, int idx);
 void			ft_print_status(t_philo *philo, char *status);
-void			ft_print_unverified(t_philo *philo, char *status);
+void			ft_print_locked(t_philo *philo, char *status);
