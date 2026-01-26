@@ -1,0 +1,12 @@
+
+# Ignore Directories
+./bin/
+./libs/
+./objs/
+
+# Ignore Files
+*.o
+*.a
+
+# Develop Directories
+.vscode/
