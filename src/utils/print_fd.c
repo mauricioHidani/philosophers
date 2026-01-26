@@ -6,11 +6,11 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 23:32:30 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/25 23:34:54 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/25 23:51:49 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
 size_t	print_fd(const char *src, int fd)
 {
