@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/25 23:14:40 by mhidani           #+#    #+#              #
-#    Updated: 2026/01/25 23:20:31 by mhidani          ###   ########.fr        #
+#    Updated: 2026/01/26 10:15:43 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SINCE		= 17 November 2025
 
 # BASIC CONTROLLERS
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -lpthread
 ARCHIVER	= ar
 ARFLAGS		= -rcs
 VALGRIND	= valgrind
@@ -30,6 +30,7 @@ REMOVE		= rm
 RMFLAGS		= --recursive --force
 
 # BASE DIRECTORIES
+INCS_DIR	= includes
 SRCS_DIR	= srcs
 LIBS_DIR	= libs
 OBJS_DIR	= objs
