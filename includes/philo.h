@@ -32,7 +32,7 @@ typedef struct s_fork	t_fork;
 
 typedef struct s_table
 {
-	int			n_philos;
+	int			members;
 	long		start_time;
 	long		time_to_die;
 	long		time_to_eat;
