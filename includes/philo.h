@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 23:23:10 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/30 23:11:19 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 14:56:28 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,41 +26,35 @@
 # define MSG_THINKING "is thinking"
 # define MSG_DIED "died"
 
-typedef pthread_mutex_t	t_mutex;
 typedef struct s_table	t_table;
+typedef struct s_philo	t_philo;
 typedef struct s_fork	t_fork;
 
 typedef struct s_table
 {
-	int			members;
-	long		start_time;
-	long		time_to_die;
-	long		time_to_eat;
-	long		time_to_sleep;
-	long		limit_meals;
-	t_bool		is_finished;
-	t_philo		**philomenas;
-	t_fork		**forks;
-	pthread_t	monitor;
-	t_mutex		print_mtx;
-	t_mutex		death_mtx;
+	int				members;
+	long			start_time;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			limit_meals;
+	t_bool			is_finished;
+	t_philo			**philomenas;
+	pthread_t		monitor;
+	pthread_mutex_t	**forks;
+	pthread_mutex_t	print_mtx;
+	pthread_mutex_t	death_mtx;
 }	t_table;
-
-typedef struct s_fork
-{
-	int			id;
-	t_mutex		fork;
-}	t_fork;
 
 typedef struct s_philo
 {
-	int			id;
-	long		meals;
-	long		last_meal;
-	t_table		*table;
-	pthread_t	thread;
-	t_fork		*left_fork;
-	t_fork		*right_fork;
+	int				id;
+	long			meals;
+	long			last_meal;
+	t_table			*table;
+	pthread_t		thread;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
 }	t_philo;
 
 // Serve Meal At The Table -----------------------------------------------------

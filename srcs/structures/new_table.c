@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:45:26 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/29 17:28:10 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 14:56:39 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_table	*new_table(int argc, char **argv)
 	if (argc > 5)
 		table->limit_meals = ft_atol(argv[5]);
 	table->is_finished = FALSE;
-	table->forks = ft_calloc(table->members + 1, sizeof(t_fork *));
+	table->forks = ft_calloc(table->members + 1, sizeof(pthread_mutex_t *));
 	if (!table->forks)
 	{
 		cpinfo(ERROR, STDERR_FILENO, ERRMSG_ALLOC);
