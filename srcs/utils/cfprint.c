@@ -14,7 +14,6 @@
 
 size_t	cfprint(int fd, char *format, char *src)
 {
-	size_t	i;
 	size_t	counter;
 
 	if (!format || fd < 0)

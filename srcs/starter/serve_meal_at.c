@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:42:31 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/31 13:57:25 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 15:16:31 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ static void	join_threads(t_table *table);
 
 int	serve_meal_at(t_table *table)
 {
-	t_philo	**philos;
-	int		sts;
 	size_t	i;
 
 	i = 0;
