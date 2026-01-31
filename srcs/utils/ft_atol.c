@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 11:23:13 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 20:34:00 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 13:51:12 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ long	ft_atol(char *nbr)
 	i = 0;
 	num = 0;
 	sign = 1;
-	while (nbr[i] && ft_isifs(nbr[i]))
+	while (nbr[i] && ft_isspace(nbr[i]))
 		i++;
 	if (nbr[i] == '+' || nbr[i] == '-')
 	{

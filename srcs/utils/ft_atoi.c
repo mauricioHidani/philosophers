@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 18:41:30 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/30 18:41:51 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 13:51:30 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_atoi(char *nbr)
 	i = 0;
 	num = 0;
 	sign = 1;
-	while (nbr[i] && ft_isifs(nbr[i]))
+	while (nbr[i] && ft_isspace(nbr[i]))
 		i++;
 	if (nbr[i] == '+' || nbr[i] == '-')
 	{
