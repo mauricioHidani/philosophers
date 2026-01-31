@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_table.c                                      :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/28 17:04:06 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 21:24:52 by mhidani          ###   ########.fr       */
+/*   Created: 2026/01/29 17:44:24 by mhidani           #+#    #+#             */
+/*   Updated: 2026/01/29 17:51:37 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	unset_table(t_table *table)
+void	cleanup(t_table *table)
 {
-	size_t	i;
-
 	if (!table)
 		return ;
-	i = 0;
-	while (table->forks[i])
-	{
-		destroy_fork(table->forks[i]);
-		i++;
-	}	
+	destroy_forks(table->forks);
+	destroy_philos(table->philomenas);
+	pthread_mutex_destroy(&table->print_mtx);
+	pthread_mutex_destroy(&table->death_mtx);
 	free(table);
 }
