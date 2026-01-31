@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 09:42:25 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 16:58:20 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/29 16:15:39 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 # define ERRMSG_ALLOC "It was not possible to allocate memory of this type"
 # define ERRMSG_DESTROY "There was no correct destruction for the type"
+# define ERRMSG_PRINT "The information was not printed, something went wrong"
+# define ERRMSG_THREAD "Something went wrong while creating the thread"
 
 typedef char			t_bool;
 
