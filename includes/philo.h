@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 23:23:10 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/31 14:56:28 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 15:07:52 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,15 @@ t_philo	*new_philo(t_table *table, int idx);
 t_philo	**new_philos(t_table *table);
 void	tidy_up_utensils(t_table *table);
 void	destroy_philos(t_philo **philos);
-void	destroy_forks(t_fork **forks);
+void	destroy_forks(pthread_mutex_t **forks);
 void	cleanup(t_table *table);
 
 // ------------------------------------------------------------------ Structures
+
+// Handler ---------------------------------------------------------------------
+
+int		phelper(void);
+
+// --------------------------------------------------------------------- Handler
 
 #endif
