@@ -39,6 +39,7 @@ typedef struct s_table
 	long		time_to_sleep;
 	long		limit_meals;
 	t_bool		is_finished;
+	t_philo		**philomenas;
 	t_fork		**forks;
 	t_mutex		print_mtx;
 	t_mutex		death_mtx;
