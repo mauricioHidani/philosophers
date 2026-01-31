@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:43:52 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/26 10:44:05 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/29 14:14:54 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ long	get_timestamp_ms(void)
 	long			timestamp;
 
 	gettimeofday(&tvalue, NULL);
-	timestamp = tvalue.tv_sec * 1000 + tvalue.tv_usec / 1000;
+	timestamp = (tvalue.tv_sec * 1000) + (tvalue.tv_usec / 1000);
 	return (timestamp);
 }
