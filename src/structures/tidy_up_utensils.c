@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   accommodate_philos_at.c                            :+:      :+:    :+:   */
+/*   tidy_up_utensils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/28 20:48:30 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 21:13:43 by mhidani          ###   ########.fr       */
+/*   Created: 2026/01/29 14:43:30 by mhidani           #+#    #+#             */
+/*   Updated: 2026/01/29 17:57:54 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_philo	**accommodate_philos_at(t_table *table)
+void	tidy_up_utensils(t_table *table)
 {
-	t_philo	**philomenas;
 	size_t	i;
 
 	if (!table)
-		return (NULL);
-	philomenas = ft_calloc(table->n_philos + 1, sizeof(t_philo *));
-	if (!philomenas)
-	{
-		pinfo(ERROR, STDERR_FILENO, ERRMSG_ALLOC);
-		return (NULL);
-	}
+		return ;
 	i = 0;
-	while (i < table->n_philos)
+	while (table->forks[i])
 	{
-		philomenas[i] = new_philos(table);
-		philomenas[i]->id = i + 1;
-		philomenas[i]->right_fork = table->forks[i];
+		pthread_mutex_init(table->forks[i], NULL);
 		i++;
 	}
-	return (philomenas);
+	pthread_mutex_init(&table->print_mtx, NULL);
+	pthread_mutex_init(&table->death_mtx, NULL);
 }
