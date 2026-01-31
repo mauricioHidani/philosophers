@@ -6,7 +6,7 @@
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/25 23:14:40 by mhidani           #+#    #+#              #
-#    Updated: 2026/01/26 10:15:43 by mhidani          ###   ########.fr        #
+#    Updated: 2026/01/30 23:15:01 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,12 @@ EXECUTABLE	= $(BIN_DIR)/$(NAME)
 # C FILES
 EXEC_FILE	= main.c
 SRCS_FILES	= 
-UTILS_FILES	= 
+UTILS_FILES	= cfprint.c cfprint_reset.c cpinfo.c cprint.c ft_atoi.c ft_atol.c \
+			  ft_bzero.c ft_calloc.c ft_isspace.c ft_itoa.c ft_ltoa.c \
+			  ft_strchr.c ft_strdup.c ft_strlen.c ft_strncmp.c \
+			  get_timestamp_ms.c sleep_for.c
 
+UTILS		= $(addprefix $(SRC_DIR)/$(UTILS_DIR)/, $(UTILS_FILES))
 SRCS		= $(addprefix $(SRCS_DIR)/, $(EXEC_FILE))
 LIBS		= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
 
