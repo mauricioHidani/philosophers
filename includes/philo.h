@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 23:23:10 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/29 17:50:47 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/30 23:11:19 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,35 @@ typedef struct s_philo
 	t_fork		*left_fork;
 	t_fork		*right_fork;
 }	t_philo;
+
+// Serve Meal At The Table -----------------------------------------------------
+
+int	serve_meal_at(t_table *table);
+
+// ----------------------------------------------------- Serve Meal At The Table
+
+// Mainteiner ------------------------------------------------------------------
+
+void	*monitor_runtine(void *ptr);
+void	*philo_runtine(void *ptr);
+void	philo_think(t_philo *philo);
+void	philo_sleep(t_philo *philo);
+void	philo_eat(t_philo *philo);
+void	print_action(t_philo *philo, char *action);
+
+// ------------------------------------------------------------------ Mainteiner
+
+// Structures ------------------------------------------------------------------
+
+t_bool	parse_input(int argc, char **argv, t_table **table);
+t_table	*new_table(int argc, char **argv);
+t_philo	*new_philo(t_table *table, int idx);
+t_philo	**new_philos(t_table *table);
+void	tidy_up_utensils(t_table *table);
+void	destroy_philos(t_philo **philos);
+void	destroy_forks(t_fork **forks);
+void	cleanup(t_table *table);
+
+// ------------------------------------------------------------------ Structures
 
 #endif
