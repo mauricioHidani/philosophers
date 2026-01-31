@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_fork.c                                     :+:      :+:    :+:   */
+/*   destroy_forks.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 18:51:26 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 18:52:34 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/29 17:48:32 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	destroy_fork(t_fork *fork)
+void	destroy_forks(t_fork **forks)
 {
-	if (!fork)
+	size_t	i;
+
+	if (!forks)
 		return ;
-	free(fork);
+	i = 0;
+	while (forks[i])
+	{
+		pthread_mutex_destroy(forks[i]);
+		free(forks[i]);
+		i++;
+	}
+	free(forks);
 }
