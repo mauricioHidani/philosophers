@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 20:48:30 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/29 17:38:51 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 15:16:59 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_philo	**new_philos(t_table *table)
 {
 	t_philo	**philos;
-	size_t	i;
+	int		i;
 
 	if (!table)
 		return (NULL);
