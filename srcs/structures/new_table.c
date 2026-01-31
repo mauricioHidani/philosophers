@@ -29,7 +29,7 @@ t_table	*new_table(int argc, char **argv)
 	table->time_to_eat = ft_atol(argv[3]);
 	table->time_to_sleep = ft_atol(argv[4]);
 	if (argc > 5)
-		table->limit_meals = ft_atol(argv[5], DECIMAL_BASE);
+		table->limit_meals = ft_atol(argv[5]);
 	table->is_finished = FALSE;
 	table->forks = ft_calloc(table->members + 1, sizeof(t_fork *));
 	if (!table->forks)
