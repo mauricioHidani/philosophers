@@ -41,6 +41,7 @@ typedef struct s_table
 	t_bool		is_finished;
 	t_philo		**philomenas;
 	t_fork		**forks;
+	pthread_t	monitor;
 	t_mutex		print_mtx;
 	t_mutex		death_mtx;
 }	t_table;
