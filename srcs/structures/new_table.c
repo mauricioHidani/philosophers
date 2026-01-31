@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/26 10:45:26 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/31 14:56:39 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 15:01:44 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_table	*new_table(int argc, char **argv)
 	if (!table->forks)
 	{
 		cpinfo(ERROR, STDERR_FILENO, ERRMSG_ALLOC);
-		destroy_table(table);
+		cleanup(table);
 		return (NULL);
 	}
 	return (table);
