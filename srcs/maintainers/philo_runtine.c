@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 15:58:58 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/29 18:21:03 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/31 15:00:20 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*philo_runtine(void *ptr)
 	t_philo	*philo;
 
 	if (!ptr)
-		return ;
+		return (NULL);
 	philo = (t_philo *)ptr;
 	if (philo->id % 2 == 0)
 		usleep(200);
