@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/25 23:22:27 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 21:25:21 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/29 17:53:05 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,10 @@ int	main(int argc, char **argv)
 	t_table	*table;
 	
 	if (argc < 5 || argc > 6)
-	{
-		phelper();
-		return (EXIT_SUCCESS);
-	}
-	table = set_table(argc, argv);
+		return (phelper());
+	if (!parse_input(argc, argv, &table))
+		return (phelper());
 	serve_meal_at(table);
-	unset_table(table);
+	cleanup(table);
 	return (EXIT_SUCCESS);
 }
