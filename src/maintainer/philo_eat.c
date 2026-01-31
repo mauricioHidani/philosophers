@@ -6,13 +6,13 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/29 10:00:23 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/29 15:57:35 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/30 23:06:47 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void philo_eat(t_philo *philo)
+void	philo_eat(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
