@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   remove_philos.c                                    :+:      :+:    :+:   */
+/*   destroy_philos.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/28 21:22:41 by mhidani           #+#    #+#             */
-/*   Updated: 2026/01/28 21:24:23 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/01/29 17:39:33 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	remove_philos(t_philo **philos)
+void	destroy_philos(t_philo **philos)
 {
 	size_t	i;
 
