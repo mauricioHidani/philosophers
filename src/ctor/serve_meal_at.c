@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 21:51:54 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/04 00:07:43 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/04 10:54:33 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,22 @@ void	serve_meal_at(t_table *table)
 
 	i = 0;
 	phs = table->philos;
-	if (!init_sync_resource(table))
+	if (!init_sync_resources(table))
 		return ;
 	while (i < (size_t)table->members)
 	{
+		phs[i].last_meal = table->start;
 		if (pthread_create(&phs[i].thread, NULL, philo_runtine, &phs[i]) != 0)
 		{
 			perr("");
-			printf("%sThread of philo %d creation failed%s\n", RED, i + 1, RST);
+			printf("%sThread philo %ld creation failed%s\n", RED, i + 1, RST);
 			set_finish(table);
 			break ;
 		}
 		i++;
 	}
-	monitor = table->thread;
-	if (pthread_create(monitor, NULL, monitor_runtine, monitor) != 0)
+	monitor = &table->thread;
+	if (pthread_create(monitor, NULL, monitor_runtine, table) != 0)
 	{
 		perr("The thread of monitor creation failed\n");
 		set_finish(table);
@@ -52,7 +53,7 @@ static t_bool	init_sync_resources(t_table *table)
 		perr("Initialization of the print resource failed\n");
 		return (FALSE);
 	}
-	if (phread_mutex_init(&table->state, NULL) != 0)
+	if (pthread_mutex_init(&table->state, NULL) != 0)
 	{
 		perr("Initialization of the state resource failed\n");
 		pthread_mutex_destroy(&table->print);
