@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 00:00:37 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/04 00:08:19 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/04 09:18:37 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	wait_for_end(t_table *table)
 		if (pthread_join(philos[i].thread, NULL) != 0)
 		{
 			perr("");
-			printf("%sWait for philo %d failed%s\n", RED, i + 1, RST);
+			printf("%sWait for philo %ld failed%s\n", RED, i + 1, RST);
 		}
 		i++;
 	}
