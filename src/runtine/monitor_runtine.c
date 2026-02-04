@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 14:52:53 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/03 15:11:16 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/04 11:29:37 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*monitor_runtine(void *arg)
 		}
 		if (check_satisfied(table, satisfied))
 			return (NULL);
-		usleep(500);
+		usleep(1e3);
 	}
 	return (NULL);
 }
