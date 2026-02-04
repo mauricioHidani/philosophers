@@ -5,135 +5,75 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/25 23:14:40 by mhidani           #+#    #+#              #
-#    Updated: 2026/01/31 15:19:11 by mhidani          ###   ########.fr        #
+#    Created: 2026/01/31 20:02:33 by mhidani           #+#    #+#              #
+#    Updated: 2026/02/03 07:23:07 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# INFO
-NAME			= philo
-LOCAL			= 42sp
-VERSION			= 1.0.0v
-AUTHORS			= mhidani (Mauricio Mityo Hidani)
-SINCE			= 17 November 2025
+NAME		= philo
+VERSION		= 1.0.0v
+AUTHOR		= mhidani
+LOCAL		= "42 São Paulo"
+SINCE		= "17 November 2025"
 
-# BASE DIRECTORIES
-INCS_DIR		= includes
-SRCS_DIR		= srcs
-OBJS_DIR		= objs
-BIN_DIR			= bin
+SRC_DIR		= src
+OBJ_DIR		= obj
+INCLUDE_DIR	= include
+BIN_DIR		= bin
 
-## SUB DIRECTORIES
-START_DIR		= starter
-HADLS_DIR		= handlers
-MANTS_DIR		= maintainers
-STRCS_DIR		= structures
-UTILS_DIR		= utils
+UTIL_DIR	= util
+CTOR_DIR	= ctor
+STRT_DIR	= starter
+RUNT_DIR	= runtine
 
-## SUB SOURCES DIRECTORIES
-SRCS_START_DIR	= $(SRCS_DIR)/$(START_DIR)
-SRCS_HADLS_DIR	= $(SRCS_DIR)/$(HADLS_DIR)
-SRCS_MANTS_DIR	= $(SRCS_DIR)/$(MANTS_DIR)
-SRCS_STRCS_DIR	= $(SRCS_DIR)/$(STRCS_DIR)
-SRCS_UTILS_DIR	= $(SRCS_DIR)/$(UTILS_DIR)
+MAIN_FILE	= main.c
+UTIL_FILES	= ft_strlen.c ft_strncmp.c ft_isspace.c ft_atoi.c ft_atol.c \
+			  ft_bzero.c ft_calloc.c get_timestamp_ms.c wait_for_ms.c
+CTOR_FILES	= new_table.c destroy_table.c new_philos.c destroy_philos.c \
+			  new_forks.c destroy_forks.c
+STRT_FILES	= serve_meal_at.c
+RUNT_FILES	= monitor_runtine.c philo_runtine.c philo_eat.c philo_think.c \
+			  philo_sleep.c should_stop.c print.c
 
-## SUB OBJECTS DIRECTORIES
-OBJS_START_DIR	= $(OBJS_DIR)/$(START_DIR)
-OBJS_HADLS_DIR	= $(OBJS_DIR)/$(HADLS_DIR)
-OBJS_MANTS_DIR	= $(OBJS_DIR)/$(MANTS_DIR)
-OBJS_STRCS_DIR	= $(OBJS_DIR)/$(STRCS_DIR)
-OBJS_UTILS_DIR	= $(OBJS_DIR)/$(UTILS_DIR)
+FILES		= $(wildcard $(SRC_DIR)/*.c)
+SRC			= $(addprefix $(SRC_DIR)/, $(FILES))
+OBJ			= $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-TGT_OBJS_DIR	= $(BIN_DIR) $(OBJS_START_DIR) $(OBJS_HADLS_DIR) \
-				  $(OBJS_MANTS_DIR) $(OBJS_STRCS_DIR) $(OBJS_UTILS_DIR)
+EXC			= $(BIN_DIR)/$(NAME)
 
-# HEADER
-HEADERS			= $(INCS_DIR)/philo.h $(INCS_DIR)/utils.h $(INCS_DIR)/type.h
+CC			= cc
+CFLAGS		= -g -O0 -pthread -Wall -Wextra -Werror
+IFLAGS		= -I $(INCLUDE_DIR)/
+BFLAGS		= -lpthread
 
-# C FILES
-EXEC_FILE		= main.c
-START_FILES		= serve_meal_at.c
-HADLS_FILES		= phelper.c
-MANTS_FILES		= monitor_runtine.c philo_eat.c philo_runtine.c philo_sleep.c \
-				  philo_think.c print_action.c
-STRCS_FILES		= cleanup.c destroy_forks.c destroy_philos.c new_philo.c \
-				  new_philos.c new_table.c parse_input.c tidy_up_utensils.c
-UTILS_FILES		= cfprint.c cfprint_reset.c cpinfo.c cprint.c ft_atoi.c \
-				  ft_atol.c ft_bzero.c ft_calloc.c ft_isspace.c \
-				  ft_itoa.c ft_ltoa.c ft_strchr.c ft_strdup.c ft_strlen.c \
-				  ft_strncmp.c get_timestamp_ms.c sleep_for.c
+VALGRIND	= valgrind
+VFLAGS		= --leak-check=full --track-origins=yes --show-leak-kinds=all
+VARGS		?= "2 200 100 100 7"
 
-# FINAL SOURCE FILES
-MAIN			= $(SRCS_DIR)/$(EXEC_FILE)
-SRCS			= $(MAIN) \
-				  $(addprefix $(SRCS_START_DIR)/, $(START_FILES)) \
-				  $(addprefix $(SRCS_HADLS_DIR)/, $(HADLS_FILES)) \
-				  $(addprefix $(SRCS_MANTS_DIR)/, $(MANTS_FILES)) \
-				  $(addprefix $(SRCS_STRCS_DIR)/, $(STRCS_FILES)) \
-				  $(addprefix $(SRCS_UTILS_DIR)/, $(UTILS_FILES)) \
+MKDIR		= mkdir
+MKDFLAGS	= --parents
 
-# FINAL OBJECT FILES
-OBJS			= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+all: $(EXC)
 
-# EXECUTABLE FILE
-EXECUTABLE		= $(BIN_DIR)/$(NAME)
+$(EXC): $(BIN_DIR)
+	$(CC) $(CFLAGS) $(IFLAGS) $(FILES) $(BFLAGS) -o $@
 
-# BASIC CONTROLLERS
-CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
-IFLAGS			= -I $(INCS_DIR)/
-BFLAGS			= -lpthread
-ARCHIVER		= ar
-ARFLAGS			= -rcs
-VALGRIND		= valgrind
-VFLAGS			= --leak-check=full --show-leak-kinds=all
-MKDIR			= mkdir
-MKDFLAGS		= --parents
-REMOVE			= rm
-RMFLAGS			= --recursive --force
-
-# COLORS
-GREEN			= "\033[0;32m"
-RED				= "\033[0;31m"
-ORANGE			= "\033[0;38;2;255;163;72;49m"
-RESET			= "\033[0m"
-OK				= "[$(GREEN)OK$(RESET)]"
-KO				= "[$(RED)KO$(RESET)]"
-CLEAN			= "[$(ORANGE)CLEANED$(RESET)]"
-
-all: $(EXECUTABLE)
-
-$(EXECUTABLE): $(MAIN) $(OBJS) | $(BIN_DIR)
-	@$(CC) $(CLFAGS) $(IFLAGS) $^ $(BFLAGS) -o $@
-	@echo "$(OK) 📁 Directory created for the binary"
-	@echo "$(OK) 🛸 The Philosophers project is done!"
-
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADERS) | $(TGT_OBJS_DIR)
-	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-	@echo "$(OK) 📁 Create Directory $(BIN_DIR)"
-	@echo "$(OK) 📁 Create Directory $(OBJS_START_DIR)"
-	@echo "$(OK) 📁 Create Directory $(OBJS_HADLS_DIR)"
-	@echo "$(OK) 📁 Create Directory $(OBJS_MANTS_DIR)"
-	@echo "$(OK) 📁 Create Directory $(OBJS_STRCS_DIR)"
-	@echo "$(OK) 📁 Create Directory $(OBJS_UTILS_DIR)"
-	@echo "$(OK) 📄 Compiled $<"
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	$(MKDIR) $(MKDFLAGS) $(dir $@)
+	$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
 $(BIN_DIR):
-	@$(MKDIR) $(MKFLAGS) $@
-	@echo "$(OK) 📁 Create Directory $@"
+	$(MKDIR) $(MKDFLAGS) $@
 
-$(TGT_OBJS_DIR):
-	@$(MKDIR) $(MKDFLAGS) $<
-	@echo "$(OK) 📁 Create Directory $@"
+$(VALGRIND): re
+	$(VALGRIND) $(VFLAGS) $(EXC) $(VARGS)
 
 clean:
-	@$(REMOVE) $(RMFLAGS) $(OBJS_DIR)
-	@echo "$(CLEAN) 📤 Cleaned object files."
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@$(REMOVE) $(RMFLAGS) $(BIN_DIR)
-	@echo "$(CLEAN) 📤 Executable Philosophers project."
+	rm -rf $(BIN_DIR)
 
 re: fclean all
 
-.PHONY: all clean fclean re valgrind
+.PHONY: clean fclean all re
