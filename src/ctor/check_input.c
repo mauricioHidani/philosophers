@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:13:15 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/03 15:19:48 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/04 09:15:37 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_bool	check_input(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		return (FALSE);
 	i = 1;
-	while (i < argc)
+	while (i < (size_t)argc)
 	{
 		if (!check_isnum(argv[i]))
 			return (FALSE);
