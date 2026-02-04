@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 15:21:28 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/03 23:46:53 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/04 09:16:01 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ t_bool	init_table(char **in, t_table *table)
 	set_input_at(in, table);
 	table->start = 0;
 	table->finished = FALSE;
-	table->forks = new_forks(&table);
+	table->forks = new_forks(table);
 	if (!table->forks)
 		return (FALSE);
-	table->philos = new_philos(&table);
+	table->philos = new_philos(table);
 	if (!table->philos)
 	{
 		i = 0;
