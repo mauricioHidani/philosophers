@@ -1,8 +1,8 @@
 
 # Ignore Directories
-./bin/
-./libs/
-./objs/
+bin/
+libs/
+objs/
 
 # Ignore Files
 *.o
