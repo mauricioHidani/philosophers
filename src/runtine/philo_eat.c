@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/03 14:34:44 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/03 15:11:16 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/04 12:12:06 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static t_bool	take_forks(t_philo *philo)
 		psafe(philo, TAKE_FORK);
 		if (!picked_up(philo, philo->left_fork))
 			return (FALSE);
+		pthread_mutex_lock(philo->right_fork);
 		psafe(philo, TAKE_FORK);
 	}
 	return (TRUE);
