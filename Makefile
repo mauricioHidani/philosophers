@@ -5,90 +5,113 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/25 23:14:40 by mhidani           #+#    #+#              #
-#    Updated: 2026/01/25 23:20:31 by mhidani          ###   ########.fr        #
+#    Created: 2026/02/04 22:28:11 by mhidani           #+#    #+#              #
+#    Updated: 2026/02/05 11:02:07 by mhidani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# INFO
-NAME		= philo
-LOCAL		= 42sp
-VERSION		= 1.0.0v
-AUTHORS		= mhidani (Mauricio Mityo Hidani)
-SINCE		= 17 November 2025
+# INFO -------------------------------------------------------------------------
+NAME			= philo
+AUTHOR			= mhidani
+MAIL			= mhidani@student.42sp.org.br
+LOCAL			= 42sp
+VERSION			= 1.2.3v
+# ------------------------------------------------------------------------- INFO
 
-# BASIC CONTROLLERS
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror
-ARCHIVER	= ar
-ARFLAGS		= -rcs
-VALGRIND	= valgrind
-VFLAGS		= --leak-check=full --show-leak-kinds=all
-MKDIR		= mkdir
-MKDFLAGS	= --parents
-REMOVE		= rm
-RMFLAGS		= --recursive --force
+# DIRECTORIES ------------------------------------------------------------------
+SRC_DIR			= src
+INC_DIR			= include
+OBJ_DIR			= obj
+BIN_DIR			= bin
+RUNT_DIR		= runtine
+CORE_DIR		= core
+INPUT_DIR		= input
+UTIL_DIR		= util
 
-# BASE DIRECTORIES
-SRCS_DIR	= srcs
-LIBS_DIR	= libs
-OBJS_DIR	= objs
+SUB_RUNT_DIR	= $(SRC_DIR)/$(RUNT_DIR)
+SUB_CORE_DIR	= $(SRC_DIR)/$(CORE_DIR)
+SUB_INPUT_DIR	= $(SRC_DIR)/$(INPUT_DIR)
+SUB_UTIL_DIR	= $(SRC_DIR)/$(UTIL_DIR)
+# ------------------------------------------------------------------ DIRECTORIES
 
-## SUB DIRECTORIES
-UTILS_DIR	= utils
+# FILES ------------------------------------------------------------------------
+MAIN_FILE		= main.c
+RUNT_FILES		= checkers.c monitor_runtine.c philo_runtine.c psafe.c forks.c
+CORE_FILES		= cleanup.c init_table.c serve.c
+INPUT_FILES		= checkin.c phelper.c
+UTIL_FILES		= ft_atol.c ft_isdigit.c ft_isspace.c time.c
+# ------------------------------------------------------------------------ FILES
 
-# EXECUTABLE PROJECT
-EXECUTABLE	= $(BIN_DIR)/$(NAME)
+# LIST OF COMPOSITE FILES ------------------------------------------------------
+SRCS			= $(addprefix $(SRC_DIR)/, $(MAIN_FILE)) \
+				  $(addprefix $(SUB_RUNT_DIR)/, $(RUNT_FILES)) \
+				  $(addprefix $(SUB_CORE_DIR)/, $(CORE_FILES)) \
+				  $(addprefix $(SUB_INPUT_DIR)/, $(INPUT_FILES)) \
+				  $(addprefix $(SUB_UTIL_DIR)/, $(UTIL_FILES))
 
-# C FILES
-EXEC_FILE	= main.c
-SRCS_FILES	= 
-UTILS_FILES	= 
+OBJS			= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-SRCS		= $(addprefix $(SRCS_DIR)/, $(EXEC_FILE))
-LIBS		= $(addprefix $(SRCS_DIR)/, $(SRCS_FILES))
+EXEC			= $(BIN_DIR)/$(NAME)
+DEXC			= $(BIN_DIR)/debug
+# ------------------------------------------------------ LIST OF COMPOSITE FILES
 
-# COLORS
-GREEN		= \033[0;32m
-RED			= \033[0;31m
-RESET		= \033[0m
+# PREPARATIONS -----------------------------------------------------------------
+CC				= cc
+BFLAGS			= -lpthread
+CFLAGS			= -Wall -Wextra -Werror
+DFLAGS			= -g -O0 -pthread -Wall -Wextra -Werror
+IFLAGS			= -I $(INC_DIR)/
 
-all: $(EXECUTABLE)
+MKDIR			= mkdir
+MKDFLAGS		= --parents
+REMOVE			= rm
+RMFLAGS			= --recursive --force
+# ----------------------------------------------------------------- PREPARATIONS
 
-$(EXECUTABLE): $(LIB) $(SRCS)
-	@$(CC) $(CLFAGS) $^ -o $@
-	@echo "🛸The Philosophers project is done!"
+# COLORS AND FORMAT ------------------------------------------------------------
+GREEN			:= "\033[0;38;2;51;209;122;49m"
+RED				:= "\033[0;38;2;224;27;36;49m"
+BLUE			:= "\033[0;38;2;53;132;228;49m"
+ORANGE			:= "\033[0;38;2;255;120;0;49m"
+RST				:= "\033[0m"
 
-$(LIB): $(OBJS) | $(LIB_DIR)
-	@$(AR) $(ARFLAGS) $@ $^
-	@echo "📦The Static Library is ready!"
+OK				:= "[$(GREEN)OK$(RST)]"
+KO				:= "[$(RED)KO$(RST)]"
+CLEAN			:= "[$(ORANGE)CLEAN$(RST)]"
 
-$(OBJS_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJS_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "[$(GREEN)COMPILED$(RESET)] $<"
+BANNER			:= banner
+# ------------------------------------------------------------ COLORS AND FORMAT
 
-$(LIB_DIR):
-	@$(MKDIR) $(MKFLAGS) $@
-	@echo "📁Create Directory $@"
+all: $(BANNER) $(EXEC)
 
-$(LIB_DIR):
-	@$(MKDIR) $(MKFLAGS) $@
-	@echo "📁Create Directory $@"
+$(EXEC): $(OBJS)
+	@$(MKDIR) $(MKDFLAGS) $(BIN_DIR)
+	@$(CC) $(CFLAGS) $(IFLAGS) $^ $(BFLAGS) -o $@
+	@echo "📁 Executable stored in $@"
+	@echo "🛸 Everything is ready for the project"
 
-$(OBJS_DIR):
-	@$(MKDIR) $(MKFLAGS) $@
-	@echo "📁Create Directory $@"
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(MKDIR) $(MKDFLAGS) $(dir $@)
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
+	@echo "$(OK) Compiled $<"
+
+$(BANNER):
+	@echo " ______  __  __  __  __      ______   "
+	@echo "/\\  == \\/\\ \\_\\ \\/\\ \\/\\ \\    /\\  __ \\  "
+	@echo "\\ \\  _-/\\ \\  __ \\ \\ \\ \\ \\___\\ \\ \\/\\ \\ "
+	@echo " \\ \\_\\   \\ \\_\\ \\_\\ \\_\\ \\_____\\ \\_____\\"
+	@echo "  \\/_/    \\/_/\\/_/\\/_/\\/_____/\\/_____/"
+	@echo "$(LOCAL) | $(NAME) $(VERSION)"
+	@echo "$(MAIL)"
 
 clean:
-	@$(REMOVE) $(RMFLAGS) $(OBJS_DIR)
-	@echo "[$(RED)REMOVED$(RESET)] Cleaned object files."
+	@$(REMOVE) $(RMFLAGS) $(OBJ_DIR)
+	@echo "$(CLEAN) Clean objects"
 
 fclean: clean
-	@$(REMOVE) $(RMFLAGS) $(LIBS_DIR)
-	@echo "[$(RED)CLEAN$(RESET)] Library."
-	@$(REMOVE) $(RMFLAGS) $(NAME)
-	@echo "[$(RED)CLEAN$(RESET)] Executable Philosophers project."
+	@$(REMOVE) $(RMFLAGS) $(BIN_DIR)
+	@echo "$(CLEAN) Clean executable"
 
-re: fclean re
+re: fclean all
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all clean fclean re
