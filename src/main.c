@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 08:16:57 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/04 00:19:25 by mhidani          ###   ########.fr       */
+/*   Created: 2026/02/04 19:30:24 by mhidani           #+#    #+#             */
+/*   Updated: 2026/02/04 21:56:24 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	t_table table;
+	t_table	table;
 
-	if (!check_input(argc, argv))
-		return (phelper(EXIT_SUCCESS));
-	if (!init_table(argv, &table))
-		return (EXIT_FAILURE);
-	serve_meal_at(&table);
-	wait_for_end(&table);
+	if (!checkin(argc, argv))
+		return (phelper());
+	init_table(&table, argv);
+	serve_meal(&table);
+	wait_threads(&table);
 	cleanup(&table);
 	return (EXIT_SUCCESS);
 }
