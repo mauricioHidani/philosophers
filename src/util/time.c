@@ -5,30 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 08:41:26 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/03 15:11:46 by mhidani          ###   ########.fr       */
+/*   Created: 2026/02/04 20:51:11 by mhidani           #+#    #+#             */
+/*   Updated: 2026/02/04 21:34:05 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-long	get_timestamp(void)
+long	timestamp(void)
 {
-	struct timeval	tv;
-	long			ms;
+	struct timeval	tval;
+	long			time;
 
-	if (gettimeofday(&tv, NULL) != 0)
+	if (gettimeofday(&tval, NULL) != 0)
 		return (-1);
-	ms = tv.tv_sec * 1e3 + tv.tv_usec / 1e3;
-	return (ms);
+	time = tval.tv_sec * 1e3 + tval.tv_usec / 1e3;
+	return (time);
 }
 
-void	wait_ms(t_table *table, long ms)
+void	wait_time(t_table *table, long time)
 {
 	long	end;
 
-	end = get_timestamp() + ms;
-	while (get_timestamp() < end)
+	end = timestamp() + time;
+	while (timestamp() < end)
 	{
 		if (should_stop(table))
 			break ;
