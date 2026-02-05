@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/03 15:22:35 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/03 15:25:36 by mhidani          ###   ########.fr       */
+/*   Created: 2026/02/04 19:31:14 by mhidani           #+#    #+#             */
+/*   Updated: 2026/02/04 20:01:22 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ long	ft_atol(const char *src)
 	if (!src)
 		return (0);
 	i = 0;
-	nbr = 0;
 	sign = 1;
-	while (src[i] == 32 || (src[i] >= 9 && src[i] <= 13))
+	nbr = 0;
+	while (src[i] && ft_isspace(src[i]))
 		i++;
 	if (src[i] == '-')
 		sign = -1;
 	if (src[i] == '+' || src[i] == '-')
 		i++;
-	while (src[i] && src[i] >= 48 && src[i] <= 57)
+	while (src[i] && ft_isdigit(src[i]))
 	{
 		nbr = (nbr * 10) + (src[i] - 48);
 		i++;
