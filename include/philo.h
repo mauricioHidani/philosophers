@@ -5,36 +5,28 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/02 16:21:40 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/04 00:00:04 by mhidani          ###   ########.fr       */
+/*   Created: 2026/02/04 19:06:49 by mhidani           #+#    #+#             */
+/*   Updated: 2026/02/05 09:51:22 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
-# include <unistd.h>
 
-# define TRUE 0x01
-# define FALSE 0x00
+# define TRUE		0x01
+# define FALSE		0x00
 
-# define BLUE "\033[0;38;2;98;160;234;49m"
-# define RED "\033[0;38;2;237;51;59;49m"
-# define RED_ITALIC "\033[3;38;2;237;51;59;49m"
-# define GREEN "\033[0;38;2;87;227;137;49m"
-# define ORANGE "\033[0;38;2;255;163;72;49m"
-# define ITALIC "\033[3m"
-# define RST "\033[0m"
-
-# define TAKE_FORK "has taken a fork"
-# define EATING "is eating"
-# define SLEEPING "is sleeping"
-# define THINKING "is thinking"
-# define DIED "died"
+# define TAKE_FORK	"has taken a fork"
+# define EAT		"is eating"
+# define SLEEP		"is sleeping"
+# define THINK		"is thinking"
+# define DIE		"died"
 
 typedef char			t_bool;
 typedef struct s_table	t_table;
@@ -43,7 +35,7 @@ typedef struct s_philo	t_philo;
 typedef struct s_table
 {
 	long			members;
-	long			start;
+	long			start_time;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
@@ -51,49 +43,45 @@ typedef struct s_table
 	t_philo			*philos;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
-	pthread_mutex_t	state;
-	t_bool			finished;
+	pthread_mutex_t	death;
+	pthread_mutex_t	servings;
 	pthread_t		thread;
-}					t_table;
+	t_bool			stop;
+}	t_table;
 
 typedef struct s_philo
 {
-	int				id;
-	long			last_meal;
+	size_t			id;
 	long			meals;
+	long			last_meal;
 	pthread_mutex_t	meal;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	serving;
 	pthread_t		thread;
 	t_table			*table;
-	t_bool			satisfied;
-}					t_philo;
+}	t_philo;
 
+void	serve_meal(t_table *table);
 void	*monitor_runtine(void *arg);
 void	*philo_runtine(void *arg);
-t_bool	philo_eat(t_philo *philo);
-void	philo_sleep(t_philo *philo);
-void	philo_think(t_philo *philo);
-
-void	serve_meal_at(t_table *table);
-void	wait_for_end(t_table *table);
+void	find_forks(t_philo *philo, int *first, int *second);
+t_bool	take_forks(t_philo *philo, int first, int second);
+t_bool	down_forks(t_philo *philo, int first, int second);
 t_bool	should_stop(t_table *table);
+t_bool	check_deaths(t_table *table);
+t_bool	check_satisfaction(t_table *table);
+void	psafe(t_philo *philo, const char *msg);
 
-int		phelper(int exit_code);
-void	perr(const char *src);
-void	pinfo(const char *src);
-void	pwarning(const char *src);
-void	psafe(t_philo *philo, const char *src);
-
-long	get_timestamp(void);
-void	wait_ms(t_table *table, long ms);
-
-t_bool	check_input(int argc, char **argv);
-t_bool	init_table(char **in, t_table *table);
+void	init_table(t_table *table, char **args);
+void	wait_threads(t_table *table);
 void	cleanup(t_table *table);
 
-size_t	ft_strlen(const char *s);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+t_bool	checkin(int argc, char **argv);
+int		phelper(void);
+
+long	timestamp(void);
+void	wait_time(t_table *table, long time);
 long	ft_atol(const char *src);
+t_bool	ft_isdigit(char c);
+t_bool	ft_isspace(char c);
 
 #endif
