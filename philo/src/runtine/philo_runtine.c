@@ -6,7 +6,7 @@
 /*   By: mhidani <mhidani@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 21:41:41 by mhidani           #+#    #+#             */
-/*   Updated: 2026/02/07 14:09:05 by mhidani          ###   ########.fr       */
+/*   Updated: 2026/02/07 14:16:32 by mhidani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static t_bool	peat(t_philo *philo)
 {
 	int		first;
 	int		second;
-	long	now;
 	t_table	*table;
 
 	table = philo->table;
@@ -56,13 +55,13 @@ static t_bool	peat(t_philo *philo)
 	find_forks(philo, &first, &second);
 	if (!take_forks(philo, first, second))
 		return (FALSE);
-	pthread_mutex_lock(&philo->meal);
-	philo->meals++;
-	pthread_mutex_unlock(&philo->meal);
+	psafe(philo, EAT);
 	pthread_mutex_lock(&philo->serving);
 	philo->last_meal = timestamp();
 	pthread_mutex_unlock(&philo->serving);
-	psafe(philo, EAT);
+	pthread_mutex_lock(&philo->meal);
+	philo->meals++;
+	pthread_mutex_unlock(&philo->meal);
 	wait_time(table, table->time_to_eat);
 	if (!down_forks(philo, first, second))
 		return (FALSE);
@@ -83,6 +82,5 @@ static t_bool	pthink(t_philo *philo)
 	if (should_stop(philo->table))
 		return (FALSE);
 	psafe(philo, THINK);
-	wait_time(philo->table, 1);
 	return (TRUE);
 }
